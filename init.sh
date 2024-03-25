@@ -8,3 +8,5 @@ if [ -z "$replacement_link" ]; then
 fi
 
 find . -type f -exec grep -l -v 'utl' {} + | xargs sed -i "s~github\.com\/tarqeem\/template$~$replacement_link~"
+
+rm -rf utl translate init.sh .git
