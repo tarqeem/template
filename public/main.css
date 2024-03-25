@@ -1,0 +1,13 @@
+body {
+  font-family: Clarkson;
+}
+
+* {
+  border-radius: 0 !important;
+}
+
+.btn-prm {
+    color: white;
+    background-color: cadetblue;
+    border-color: cadetblue;
+}
