@@ -6,11 +6,10 @@ import (
 	"io"
 	"log"
 	"path"
-
-	"github.com/tarqeem/template/translate"
 )
 
 var Views embed.FS
+var TemplateFuncs template.FuncMap
 
 func getFSFilesRecursively(fs *embed.FS, dir string) (out []string, err error) {
 	if len(dir) == 0 {
@@ -71,11 +70,7 @@ func GetTemplates() (*template.Template, error) {
 		return nil, err
 	}
 
-	ts := template.Must(template.New("").Funcs(template.FuncMap{
-		"message": func(key string) string {
-			return translate.English[key]
-		},
-	}).ParseFiles(files...))
+	ts := template.Must(template.New("").Funcs(TemplateFuncs).ParseFiles(files...))
 
 	return ts, err
 

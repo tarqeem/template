@@ -3,6 +3,7 @@ package main
 import (
 	"embed"
 	"github.com/tarqeem/template/utl"
+	"html/template"
 	"log"
 	"net/http"
 )
@@ -20,6 +21,12 @@ var executor utl.TemplateExecutor
 func main() {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	utl.Views = views
+	utl.TemplateFuncs = template.FuncMap{
+		"message": func(key string) string {
+			// return translate.English[key]
+			return ""
+		},
+	}
 
 	ts, err := utl.GetTemplates()
 
