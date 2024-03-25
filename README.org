@@ -1,0 +1,13 @@
+#+title: Go tmpl+ent+net/http Quick Starter
+
+Get started quickly with Go template/html, ent, net/http:
+
+#+begin_src sh
+git clone https://github.com/tarqeem/template
+#+end_src
+
+Then:
+
+#+begin_src sh
+./init github.com/your_username/your_repo
+#+end_src

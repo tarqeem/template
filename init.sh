@@ -9,4 +9,4 @@ fi
 
 find . -type f -exec grep -l -v 'utl' {} + | xargs sed -i "s~github\.com\/tarqeem\/template$~$replacement_link~"
 
-rm -rf utl translate init.sh .git
+rm -rf utl translate init.sh .git README.org
