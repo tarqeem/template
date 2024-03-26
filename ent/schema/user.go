@@ -1,11 +1,7 @@
 package schema
 
 import (
-	"regexp"
-	"time"
-
 	"entgo.io/ent"
-	"entgo.io/ent/schema/field"
 	. "github.com/tarqeem/template/utl/ent"
 )
 

@@ -20,7 +20,7 @@ var (
 )
 
 // return a field `created_at`. Configure name with CreatedTableName
-func Created() ent.Field { return field.Time(CreatedTableName).Default(time.Now) }
+func Created_at() ent.Field { return field.Time(CreatedTableName).Default(time.Now) }
 
 // return a string field with `n` name and `MinNameLen` minimum length
 func String(n string) ent.Field { return field.String(n).MinLen(MinNameLen) }
