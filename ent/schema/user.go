@@ -6,7 +6,7 @@ import (
 
 	"entgo.io/ent"
 	"entgo.io/ent/schema/field"
-	. "github.com/tarqeem/template/utl"
+	. "github.com/tarqeem/template/utl/ent"
 )
 
 type User struct {
@@ -20,7 +20,7 @@ func (User) Fields() []ent.Field {
 	vp := regexp.MustCompile(`^\+?[0-9]{1,3}-?[0-9]{3}-?[0-9]{3}-?[0-9]{4}$`)
 
 	return []ent.Field{
-		EntString("name"),
+		String("name"),
 		field.String("password").Sensitive().Match(sp).NotEmpty(),
 		field.String("email").MaxLen(MaxNormalNameLength).NotEmpty().Match(ve).Unique(),
 		field.String("phone").MaxLen(MinNameLen).NotEmpty().Match(vp).Unique(),
