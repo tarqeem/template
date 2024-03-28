@@ -53,7 +53,6 @@ func main() {
 			log.Println(err.Error())
 			http.Error(w, "Internal Server Error: "+err.Error(), 500)
 		}
-
 	})
 	http.ListenAndServe(":8080", nil)
 }
