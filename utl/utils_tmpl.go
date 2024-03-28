@@ -38,7 +38,7 @@ func (e ReleaseTemplateExecutor) ExecuteTemplate(wr io.Writer, name string, data
 func GetTemplates() (*template.Template, error) {
 	files, err := fs.GetFSFilesRecursively(&Views, "pages")
 	if err != nil {
-		log.Println(err.Error())
+		log.Fatal(err.Error())
 		return nil, err
 	}
 
