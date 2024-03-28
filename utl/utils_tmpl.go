@@ -3,9 +3,9 @@ package utl
 import (
 	"embed"
 	"github.com/tarqeem/template/utl/fs"
-	"html/template"
 	"io"
 	"log"
+	"text/template"
 )
 
 var Views embed.FS
