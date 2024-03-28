@@ -3,9 +3,9 @@ package main
 import (
 	"embed"
 	"github.com/tarqeem/template/utl"
-	"html/template"
 	"log"
 	"net/http"
+	"text/template"
 )
 
 //go:embed public/*
