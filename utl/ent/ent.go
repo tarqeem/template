@@ -1,6 +1,7 @@
 package ent
 
 import (
+	"fmt"
 	"regexp"
 	"time"
 
@@ -24,6 +25,19 @@ func Created_at() ent.Field { return field.Time(CreatedTableName).Default(time.N
 
 // return a string field with `n` name and `MinNameLen` minimum length
 func String(n string) ent.Field { return field.String(n).MinLen(MinNameLen) }
+
+// return a string field with `n` name and `MinNameLen` minimum length, must
+// be one of the ones in `l`
+func StringOneOf(n string, l []string) ent.Field {
+	return field.String(n).Validate(func(s string) error {
+		for _, v := range l {
+			if s == v {
+				return nil
+			}
+		}
+		return fmt.Errorf("No such a type: %s", s)
+	})
+}
 
 // return a field `password`. Configure name with `CreatedTableName` and Regex
 // with PassRegex
