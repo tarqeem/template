@@ -7,12 +7,12 @@ import (
 
 	"entgo.io/ent"
 	"entgo.io/ent/schema/field"
+	"github.com/tarqeem/template/utl"
 )
 
 var (
 	MaxNormalNameLength = 300
 	MinNameLen          = 2
-	PassRegex           = regexp.MustCompile(`^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).+$`)
 	EmailRegex          = regexp.MustCompile(`^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$`)
 	PhoneRegex          = regexp.MustCompile(`^\+?[0-9]{1,3}-?[0-9]{3}-?[0-9]{3}-?[0-9]{4}$`)
 	CreatedTableName    = "created_at"
@@ -42,7 +42,11 @@ func StringOneOf(n string, l []string) ent.Field {
 // return a field `password`. Configure name with `CreatedTableName` and Regex
 // with PassRegex
 func Passowrd() ent.Field {
-	return field.String(PasswordTableName).Sensitive().Match(PassRegex).NotEmpty()
+	return field.String(PasswordTableName).Sensitive().NotEmpty().
+		Validate(func(s string) error {
+			_, err := utl.ValidPassword(s)
+			return err
+		})
 }
 
 // return a non negative integer field
