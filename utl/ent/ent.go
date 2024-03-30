@@ -13,8 +13,9 @@ import (
 var (
 	MaxNormalNameLength = 300
 	MinNameLen          = 2
+	MinPhoneLen         = 9
 	EmailRegex          = regexp.MustCompile(`^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$`)
-	PhoneRegex          = regexp.MustCompile(`^\+?[0-9]{1,3}-?[0-9]{3}-?[0-9]{3}-?[0-9]{4}$`)
+	PhoneRegex          = regexp.MustCompile(`^\+?\d+$`)
 	CreatedTableName    = "created_at"
 	PasswordTableName   = "passowrd"
 	PhoneTableName      = "phone"
@@ -55,12 +56,11 @@ func NonNegative(n string) ent.Field { return field.Int(n).Min(0) }
 // return a field named `phone`. Configure name with `PhoneTableName` and Regex
 // with `PhoneRegex`
 func Phone() ent.Field {
-	return field.String(PhoneTableName).MaxLen(MinNameLen).NotEmpty().Match(PhoneRegex).Unique()
+	return field.String(PhoneTableName).MaxLen(MinPhoneLen).NotEmpty().Match(PhoneRegex).Unique()
 }
 
 // return a field named `email`. Configure name with `EmailTableName` and Regex
 // with `EmailRegex`
 func Email() ent.Field {
-	return field.String("email").MaxLen(MaxNormalNameLength).
-		NotEmpty().Match(EmailRegex)
+	return field.String("email").MaxLen(MaxNormalNameLength).NotEmpty().Match(EmailRegex)
 }
