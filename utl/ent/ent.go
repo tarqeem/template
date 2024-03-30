@@ -56,7 +56,7 @@ func NonNegative(n string) ent.Field { return field.Int(n).Min(0) }
 // return a field named `phone`. Configure name with `PhoneTableName` and Regex
 // with `PhoneRegex`
 func Phone() ent.Field {
-	return field.String(PhoneTableName).MaxLen(MinPhoneLen).NotEmpty().Match(PhoneRegex).Unique()
+	return field.String(PhoneTableName).MinLen(MinPhoneLen).NotEmpty().Match(PhoneRegex).Unique()
 }
 
 // return a field named `email`. Configure name with `EmailTableName` and Regex
