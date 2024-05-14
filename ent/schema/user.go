@@ -2,7 +2,7 @@ package schema
 
 import (
 	"entgo.io/ent"
-	. "github.com/tarqeem/template/utl/ent"
+	. "github.com/tarqeem/template/utl/uent"
 )
 
 type User struct {

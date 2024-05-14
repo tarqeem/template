@@ -1,11 +1,9 @@
-package fs
+package ufs
 
 import (
 	"embed"
-	"fmt"
 	"os"
 	"path"
-	"sort"
 	"strings"
 )
 

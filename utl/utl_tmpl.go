@@ -2,7 +2,7 @@ package utl
 
 import (
 	"embed"
-	"github.com/tarqeem/template/utl/fs"
+	"github.com/tarqeem/template/utl/ufs"
 	"io"
 	"log"
 	"text/template"
@@ -36,7 +36,7 @@ func (e ReleaseTemplateExecutor) ExecuteTemplate(wr io.Writer, name string, data
 }
 
 func GetTemplates() (*template.Template, error) {
-	files, err := fs.GetFSFilesRecursively(&Views, "pages")
+	files, err := ufs.GetFSFilesRecursively(&Views, "pages")
 	if err != nil {
 		log.Fatal(err.Error())
 		return nil, err
