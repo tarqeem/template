@@ -1,6 +1,7 @@
 package ufs
 
 import (
+	"bufio"
 	"embed"
 	"os"
 	"path"
@@ -55,4 +56,26 @@ func GetFilesOfExtension(dir, x string) ([]string, error) {
 		}
 	}
 	return f, nil
+}
+
+func ReadFileAsListOfLines(f string) ([]string, error) {
+	file, err := os.Open(f)
+	if err != nil {
+		return nil, err
+	}
+	defer file.Close()
+
+	scanner := bufio.NewScanner(file)
+
+	var lines []string
+
+	for scanner.Scan() {
+		lines = append(lines, scanner.Text())
+	}
+
+	if err := scanner.Err(); err != nil {
+		return nil, err
+	}
+
+	return lines, err
 }
