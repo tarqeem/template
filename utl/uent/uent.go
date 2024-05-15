@@ -7,7 +7,7 @@ import (
 
 	"entgo.io/ent"
 	"entgo.io/ent/schema/field"
-	"github.com/tarqeem/template/utl"
+	utl "github.com/tarqeem/template/utl/all"
 )
 
 var (

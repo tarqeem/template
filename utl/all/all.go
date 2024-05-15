@@ -1,8 +1,10 @@
-// other
-package utl
+package all
 
 import (
+	"encoding/json"
 	"errors"
+	"io"
+	"net/http"
 	"unicode"
 )
 
@@ -35,11 +37,11 @@ func ValidPassword(p string) (ok bool, err error) {
 	case !sevenOrMore:
 		errors.Join(err, ErrPassSevenOrMore)
 	case !number:
-		errors.Join(err, ErrNumber)
+		errors.Join(err, ErrPassNumber)
 	case !upper:
-		errors.Join(err, ErrUpper)
+		errors.Join(err, ErrPassUpper)
 	case !special:
-		errors.Join(err, ErrSpecial)
+		errors.Join(err, ErrPassSpecial)
 	default:
 		ok = true
 	}
@@ -48,7 +50,28 @@ func ValidPassword(p string) (ok bool, err error) {
 
 var (
 	ErrPassSevenOrMore = errors.New("password must have seven or more letters")
-	ErrNumber          = errors.New("password must have at least one number")
-	ErrUpper           = errors.New("password must have at least one upercase letter")
-	ErrSpecial         = errors.New("password must have at least one special character")
+	ErrPassNumber      = errors.New("password must have at least one number")
+	ErrPassUpper       = errors.New("password must have at least one upercase letter")
+	ErrPassSpecial     = errors.New("password must have at least one special character")
 )
+
+// Get public IP using ip-api
+func GetPublicIP() (string, error) {
+	req, err := http.Get("http://ip-api.com/json/")
+	if err != nil {
+		return "", err
+	}
+	defer req.Body.Close()
+
+	body, err := io.ReadAll(io.Reader(req.Body))
+	if err != nil {
+		return "", err
+	}
+
+	var ip struct{ Query string }
+	if err = json.Unmarshal(body, &ip); err != nil {
+		return "", err
+	}
+
+	return ip.Query, nil
+}
