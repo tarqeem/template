@@ -56,8 +56,15 @@ var (
 )
 
 // Get public IP using ip-api
-func GetPublicIP() (string, error) {
-	req, err := http.Get("http://ip-api.com/json/")
+func GetPublicIP(c ...http.Client) (string, error) {
+	var req *http.Response
+	var err error
+	if len(c) == 0 {
+		req, err = http.Get("http://ip-api.com/json/")
+	} else {
+		req, err = c[0].Get("http://ip-api.com/json/")
+	}
+
 	if err != nil {
 		return "", err
 	}
